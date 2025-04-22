@@ -15,10 +15,12 @@ class FileUpload extends Component {
 
         d3.csv(url).then((data) => { // Use d3.csv to parse the CSV data (asynchronously)
           const formattedData = data.map(d => ({ // Format the data
-            Tweets: d.Tweets,
-            PredictedSentiment: d.PredictedSentiment,
-            "Dimension 1": parseFloat(d["Dimension 1"]),
-            "Dimension 2": parseFloat(d["Dimension 2"]),
+            date: parseInt(d.Date.split("/")[0]),
+            gpt: parseInt(d["GPT-4"]),
+            gemini: parseInt(d.Gemini),
+            palm: parseInt(d["PaLM-2"]),
+            claude: parseInt(d.Claude),
+            llama: parseInt(d["LLaMA-3.1"]),
           }));
           this.props.set_data(formattedData); // Pass the formatted data to the parent component
           URL.revokeObjectURL(url); // Release the Blob URL to prevent memory leaks
